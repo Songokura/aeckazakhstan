@@ -68,7 +68,12 @@
     "tr.t": "Official distributor of 12+ global brands, warehouse in Almaty, own service team. We work with companies and public customers across Kazakhstan.",
     "n.1": "projects", "n.2": "customers", "n.3": "brands distributed", "n.4": "regions of Kazakhstan", "n.5": "healthcare projects", "n.6": "kW - system capacity", "n.7": "service support",
     "br.cap": "Official distribution", "br.more": "Plus Hoppecke, Exide, Yuasa, Riello, Ritar, EnerGrid, Bereli and Peli",
-    "tr.team": "AEC team at KIHE 2026, Almaty. Four segment managers and service engineers.",
+    "tr.team": "AEC team at KIOGE 2026, Almaty. Four segment managers and service engineers.",
+    "sk.k": "Warehouse and installation", "sk.h": "From our Almaty warehouse to your site",
+    "sk.t": "Popular equipment in stock; installation and commissioning by AEC engineers.",
+    "sk.play": "Watch the video with sound", "sk.playt": "Warehouse tour with sound",
+    "sk.vcap": "Almaty warehouse: Tescom UPS and batteries on pallets, shipping from one day",
+    "sk.1": "UPS commissioning", "sk.2": "Battery cabinet assembly", "sk.3": "Genset installation on site", "sk.4": "Modular UPS in a server room",
     "cl.cap": "Trusted by", "lt.cap": "Letters of appreciation",
     "lt.tec": "Stepnogorsk CHP", "lt.hitech": "Hi-Tech Clinic", "lt.remkran": "REM-Kran",
     "u.k": "Terms", "u.h": "How we work with companies",
@@ -407,4 +412,31 @@
   if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(function () { fitText(); update(); });
   if (doc.readyState === "complete") start(); else W.addEventListener("load", start);
   update();
+})();
+
+/* Видео склада: немая петля по видимости, полный ролик со звуком по кнопке */
+(function () {
+  var box = document.getElementById("skVideo");
+  if (!box) return;
+  var v = box.querySelector("video"), btn = box.querySelector(".sk-play");
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  v.addEventListener("playing", function () { if (!box.classList.contains("is-full")) box.classList.add("is-live"); });
+  if (!reduce && "IntersectionObserver" in window) {
+    new IntersectionObserver(function (es) {
+      es.forEach(function (x) {
+        if (box.classList.contains("is-full")) return;
+        if (x.isIntersecting) {
+          if (!v.getAttribute("src")) v.setAttribute("src", v.getAttribute("data-src"));
+          var p = v.play(); if (p && p.catch) p.catch(function () {});
+        } else { v.pause(); }
+      });
+    }, { threshold: 0.45 }).observe(box);
+  }
+  btn.addEventListener("click", function () {
+    box.classList.remove("is-live"); box.classList.add("is-full");
+    v.removeAttribute("aria-hidden");
+    v.loop = false; v.muted = false; v.controls = true;
+    v.setAttribute("src", btn.getAttribute("data-full"));
+    var p = v.play(); if (p && p.catch) p.catch(function () {});
+  });
 })();
