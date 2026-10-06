@@ -75,7 +75,7 @@
     "sk.t": "Popular equipment in stock; installation and commissioning by AEC engineers.",
     "sk.play": "Watch the video with sound", "sk.playt": "Warehouse tour with sound",
     "sk.vcap": "Almaty warehouse: Tescom UPS and batteries on pallets, shipping from one day",
-    "sk.1": "UPS commissioning", "sk.2": "Battery cabinet assembly", "sk.3": "Genset installation on site", "sk.4": "Modular UPS in a server room",
+    "sk.1": "UPS connection", "sk.2": "Battery cabinet assembly", "sk.3": "Genset installation on site", "sk.4": "Socomec UPS on site",
     "cl.cap": "Trusted by", "lt.cap": "Letters of appreciation",
     "lt.tec": "Stepnogorsk CHP", "lt.hitech": "Hi-Tech Clinic", "lt.remkran": "REM-Kran",
     "u.k": "Terms", "u.h": "How we work with companies",
