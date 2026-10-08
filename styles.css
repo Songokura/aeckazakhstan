@@ -31,7 +31,7 @@ svg{display:block;flex:0 0 auto}
 .kicker::before{content:"";width:34px;height:8px;flex:0 0 auto;background:linear-gradient(var(--copper),var(--copper)) left center/26px 2px no-repeat,radial-gradient(circle at calc(100% - 4px) 50%,var(--copper) 3px,transparent 3.6px)}
 .kicker-light{color:rgba(255,255,255,.78)}
 .h1{font-weight:800;font-stretch:128%;text-transform:uppercase;line-height:.94;letter-spacing:-.005em;color:var(--white)}
-.h2{font-weight:300;font-stretch:104%;line-height:1.02;letter-spacing:-.028em;color:var(--white);font-size:clamp(32px,5.4vw,72px);margin:0 0 20px;text-wrap:balance}
+.h2{font-weight:300;font-stretch:104%;line-height:1.02;letter-spacing:-.028em;color:var(--white);font-size:clamp(32px,5.4vw,72px);margin:0 0 20px}
 .h2-dark{color:var(--navy)}
 .lead{font-size:15px;line-height:1.5;color:var(--steel);max-width:none;margin:0}
 .lead-light{color:rgba(255,255,255,.86)}
@@ -346,7 +346,7 @@ body.menu-open .hdr{backdrop-filter:none;-webkit-backdrop-filter:none;background
 .thanks[hidden]{display:none}
 .thanks b{font-size:18px;color:var(--navy)}
 .thanks p{color:var(--steel)}
-.contacts .h2{font-size:clamp(26px,3.4vw,40px)}
+.sec-contact .h2{font-size:clamp(30px,3.6vw,52px)}
 .c-list{display:flex;flex-direction:column;gap:14px;margin:26px 0}
 .c-list li{display:flex;flex-direction:column;gap:2px}
 .c-big{display:inline-flex;align-items:center;gap:10px;font-weight:500;font-size:clamp(22px,2.6vw,30px);color:var(--navy);letter-spacing:-.01em}
