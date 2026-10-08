@@ -19,9 +19,9 @@
     "menu.note": "Mon-Fri 09:00-18:00, service support 24/7",
     "hero.kicker": "Almaty · all Kazakhstan · since 2021",
     "hero.l1": "UPS, batteries, gensets", "hero.l2": "Uninterruptible", "hero.l3": "power",
-    "hero.lead": "Sizing, supply, installation and 24/7 service for data centers, hospitals, plants and airports. 200+ sites in 20 regions of Kazakhstan, systems up to 4,800 kW.",
+    "hero.lead": "Sizing, supply, installation and 24/7 service for any site that cannot lose power: from server rooms and clinics to plants and airports. 200+ sites in 20 regions of Kazakhstan, systems up to 4,800 kW.",
     "hero.cta1": "Get a quote in 24 hours", "hero.cta2": "Solutions", "hero.ig": "Sites and exhibitions on Instagram",
-    "m.grid": "Grid", "m.dgu": "Genset", "m.ups": "UPS", "m.akb": "Battery", "m.load": "Load",
+    "m.grid": "Grid", "m.dgu": "Genset", "m.ups": "UPS", "m.akb": "Battery", "m.load1": "Critical", "m.load2": "load",
     "m.s0": "Grid is fine: the UPS filters voltage and feeds the load",
     "m.s1": "Grid is down: the load runs on batteries with no break",
     "m.s2": "Genset started: the site runs as long as there is fuel",
@@ -297,10 +297,11 @@
     for (var i = 0; i < pws.length; i++) {
       var pw = pws[i], r = pw.getBoundingClientRect();
       var enter = clamp(1 - r.top / H);
-      var stay = r.height > H ? clamp(-r.top / (r.height - H)) : 0;
+      var isHero = pw.classList.contains("pw-hero");
+      var heroAuto = isHero && W.innerWidth < 900;
+      var stay = r.height > H && !heroAuto ? clamp(-r.top / (r.height - H)) : 0;
       var nxt = pws[i + 1] || firstSec;
       var exit = nxt ? clamp(1 - nxt.getBoundingClientRect().top / H) : 0;
-      var isHero = pw.classList.contains("pw-hero");
       var lit = isHero ? inrush(INTRO) : inrush(enter);
       var pulse = isHero ? INTRO : clamp(enter * 1.25);
       pw.style.setProperty("--enter", enter.toFixed(4));
@@ -314,7 +315,7 @@
       var txts = pw.querySelectorAll(".txt");
       for (var k = 0; k < txts.length; k++) txts[k].classList.toggle("on", isHero ? INTRO > 0.4 : enter > 0.72);
       if (isHero && mimic) {
-        var ph = r.height > H + 1 ? (stay < 0.33 ? "ph0" : stay < 0.66 ? "ph1" : "ph2") : ["ph0", "ph1", "ph2"][Math.floor(Date.now() / 2600) % 3];
+        var ph = !heroAuto && r.height > H + 1 ? (stay < 0.33 ? "ph0" : stay < 0.66 ? "ph1" : "ph2") : ["ph0", "ph1", "ph2"][Math.floor(Date.now() / 2600) % 3];
         if (!mimic.classList.contains(ph)) { mimic.classList.remove("ph0", "ph1", "ph2"); mimic.classList.add(ph); }
       }
     }
@@ -332,7 +333,7 @@
   }
   function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
   W.addEventListener("scroll", onScroll, { passive: true });
-  setInterval(function () { if (pws[0] && pws[0].offsetHeight <= W.innerHeight + 1 && W.pageYOffset < W.innerHeight) onScroll(); }, 650);
+  setInterval(function () { if (pws[0] && (W.innerWidth < 900 || pws[0].offsetHeight <= W.innerHeight + 1) && W.pageYOffset < pws[0].offsetHeight) onScroll(); }, 650);
   W.addEventListener("resize", function () { fitText(); onScroll(); updateRails(); });
   function runIntro(ts) {
     if (!introStart) introStart = ts;

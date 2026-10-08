@@ -31,7 +31,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wdth,wght@100..151,300..800&display=swap">
-<link rel="stylesheet" href="styles.css?v=20261008-5">
+<link rel="stylesheet" href="styles.css?v=20261008-6">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -161,7 +161,7 @@
           <span class="l2 fit" data-i="hero.l2">Бесперебойное</span>
           <span class="l2" data-i="hero.l3">питание</span>
         </h1>
-        <p class="lead lead-light" data-i="hero.lead">Подбор, поставка, монтаж и сервис 24/7 для ЦОД, клиник, заводов и аэропортов. 200+ объектов в 20 областях Казахстана, системы до 4 800 кВт.</p>
+        <p class="lead lead-light" data-i="hero.lead">Подбор, поставка, монтаж и сервис 24/7 для любого объекта, где нельзя терять питание: от серверной и клиники до завода и аэропорта. 200+ объектов в 20 областях Казахстана, системы до 4 800 кВт.</p>
         <div class="cta-row">
           <a class="btn btn-wa" href="https://wa.me/77066511601" target="_blank" rel="noopener" data-wa="kp"><svg width="18" height="18"><use href="#ic-wa"/></svg><span data-i="hero.cta1">Получить КП за 24 часа</span></a>
           <a class="btn btn-glass" href="#ibp"><span data-i="hero.cta2">Каталог решений</span><svg width="16" height="16"><use href="#ic-arr"/></svg></a>
@@ -175,13 +175,15 @@
           <g class="m-lines" fill="none" stroke-linecap="round">
             <!-- сеть -> узел -->
             <path class="m-base" d="M96 60 H150 V110 H212"/>
-            <path class="m-flow m-flow-grid" d="M96 60 H150 V110 H212"/>
+            <path class="m-flow m-flow-grid" d="M96 60 H150 V110"/>
+            <!-- узел -> ИБП: общий участок, горит и от сети, и от ДГУ -->
+            <path class="m-flow m-flow-bus" d="M150 110 H212"/>
             <!-- ДГУ -> узел -->
             <path class="m-base" d="M96 165 H150 V110"/>
             <path class="m-flow m-flow-dgu" d="M96 165 H150 V110"/>
             <!-- ИБП -> нагрузка -->
-            <path class="m-base" d="M308 110 H424"/>
-            <path class="m-flow m-flow-out" d="M308 110 H424"/>
+            <path class="m-base" d="M308 110 H420"/>
+            <path class="m-flow m-flow-out" d="M308 110 H420"/>
             <!-- АКБ <-> ИБП -->
             <path class="m-base" d="M260 136 V180"/>
             <path class="m-flow m-flow-akb" d="M260 180 V136"/>
@@ -195,12 +197,13 @@
             <rect class="m-box m-box-dgu" x="8" y="145" width="88" height="40" rx="6"/>
             <rect class="m-box m-box-ups" x="212" y="84" width="96" height="52" rx="7"/>
             <rect class="m-box m-box-akb" x="212" y="180" width="96" height="40" rx="6"/>
-            <rect class="m-box m-box-load" x="424" y="84" width="88" height="52" rx="7"/>
+            <rect class="m-box m-box-load" x="420" y="84" width="96" height="52" rx="7"/>
             <text class="m-t" x="52" y="65" text-anchor="middle" data-i="m.grid">Сеть</text>
             <text class="m-t" x="52" y="170" text-anchor="middle" data-i="m.dgu">ДГУ</text>
             <text class="m-t m-t-big" x="260" y="115" text-anchor="middle" data-i="m.ups">ИБП</text>
             <text class="m-t" x="260" y="205" text-anchor="middle" data-i="m.akb">АКБ</text>
-            <text class="m-t" x="468" y="115" text-anchor="middle" data-i="m.load">Нагрузка</text>
+            <text class="m-t m-t-load" x="468" y="107" text-anchor="middle" data-i="m.load1">Критическая</text>
+            <text class="m-t m-t-load" x="468" y="122" text-anchor="middle" data-i="m.load2">нагрузка</text>
             <circle class="m-dot" cx="150" cy="110" r="3.5"/>
           </g>
         </svg>
@@ -525,6 +528,8 @@
       <li><img src="assets/l-tusas.webp" width="420" height="578" alt="Благодарственное письмо Turkish Aerospace (TUSAŞ)" loading="lazy" decoding="async"><span>Turkish Aerospace</span></li>
       <li><img src="assets/l-tec.webp" width="420" height="595" alt="Благодарственное письмо Степногорской ТЭЦ" loading="lazy" decoding="async"><span data-i="lt.tec">Степногорская ТЭЦ</span></li>
       <li><img src="assets/l-hitech.webp" width="420" height="594" alt="Благодарственное письмо клиники Hi-Tech" loading="lazy" decoding="async"><span data-i="lt.hitech">Клиника Hi-Tech</span></li>
+      <li><img src="assets/l-labeco.webp" width="420" height="594" alt="Благодарственное письмо ТОО «LabEco Technology» за поставку ИБП для медицинского оборудования" loading="lazy" decoding="async"><span>LabEco Technology</span></li>
+      <li><img src="assets/l-promdss.webp" width="420" height="594" alt="Благодарственное письмо ТОО «PromDss Kazakhstan» за поставку ИБП для медицинского оборудования" loading="lazy" decoding="async"><span>PromDss Kazakhstan</span></li>
       <li><img src="assets/l-ziylan.webp" width="420" height="578" alt="Благодарственное письмо компании Ziylan" loading="lazy" decoding="async"><span>Ziylan</span></li>
       <li><img src="assets/l-remkran.webp" width="420" height="594" alt="Благодарственное письмо компании РЭМ-Кран" loading="lazy" decoding="async"><span data-i="lt.remkran">РЭМ-Кран</span></li>
     </ul>
@@ -652,6 +657,6 @@
   <a class="sk-ig" href="https://www.instagram.com/aec_kazakhstan/" target="_blank" rel="noopener" aria-label="Instagram"><svg width="20" height="20"><use href="#ic-ig"/></svg></a>
 </nav>
 
-<script src="script.js?v=20261008-5" defer></script>
+<script src="script.js?v=20261008-6" defer></script>
 </body>
 </html>
