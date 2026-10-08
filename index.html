@@ -31,7 +31,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wdth,wght@100..151,300..800&display=swap">
-<link rel="stylesheet" href="styles.css?v=20261008-6">
+<link rel="stylesheet" href="styles.css?v=20261008-7">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -523,15 +523,15 @@
   </div>
   <div class="rail-wrap">
     <ul class="rail rail-letters" id="letters" tabindex="0" aria-label="Благодарственные письма заказчиков">
-      <li><img src="assets/l-kazaero.webp" width="420" height="594" alt="Благодарственное письмо РГП «Казаэронавигация»" loading="lazy" decoding="async"><span>Казаэронавигация</span></li>
-      <li><img src="assets/l-emirmed.webp" width="420" height="534" alt="Благодарственное письмо медицинского центра Emirmed" loading="lazy" decoding="async"><span>Emirmed</span></li>
-      <li><img src="assets/l-tusas.webp" width="420" height="578" alt="Благодарственное письмо Turkish Aerospace (TUSAŞ)" loading="lazy" decoding="async"><span>Turkish Aerospace</span></li>
-      <li><img src="assets/l-tec.webp" width="420" height="595" alt="Благодарственное письмо Степногорской ТЭЦ" loading="lazy" decoding="async"><span data-i="lt.tec">Степногорская ТЭЦ</span></li>
-      <li><img src="assets/l-hitech.webp" width="420" height="594" alt="Благодарственное письмо клиники Hi-Tech" loading="lazy" decoding="async"><span data-i="lt.hitech">Клиника Hi-Tech</span></li>
-      <li><img src="assets/l-labeco.webp" width="420" height="594" alt="Благодарственное письмо ТОО «LabEco Technology» за поставку ИБП для медицинского оборудования" loading="lazy" decoding="async"><span>LabEco Technology</span></li>
-      <li><img src="assets/l-promdss.webp" width="420" height="594" alt="Благодарственное письмо ТОО «PromDss Kazakhstan» за поставку ИБП для медицинского оборудования" loading="lazy" decoding="async"><span>PromDss Kazakhstan</span></li>
-      <li><img src="assets/l-ziylan.webp" width="420" height="578" alt="Благодарственное письмо компании Ziylan" loading="lazy" decoding="async"><span>Ziylan</span></li>
-      <li><img src="assets/l-remkran.webp" width="420" height="594" alt="Благодарственное письмо компании РЭМ-Кран" loading="lazy" decoding="async"><span data-i="lt.remkran">РЭМ-Кран</span></li>
+      <li><img src="assets/l-labeco.webp" data-full="assets/l-labeco-full.webp" width="420" height="594" alt="Благодарственное письмо ТОО «LabEco Technology» за поставку ИБП для медицинского оборудования" loading="lazy" decoding="async"><span>LabEco Technology</span></li>
+      <li><img src="assets/l-promdss.webp" data-full="assets/l-promdss-full.webp" width="420" height="594" alt="Благодарственное письмо ТОО «PromDss Kazakhstan» за поставку ИБП для медицинского оборудования" loading="lazy" decoding="async"><span>PromDss Kazakhstan</span></li>
+      <li><img src="assets/l-kazaero.webp" data-full="assets/l-kazaero-full.webp" width="420" height="594" alt="Благодарственное письмо РГП «Казаэронавигация»" loading="lazy" decoding="async"><span>Казаэронавигация</span></li>
+      <li><img src="assets/l-emirmed.webp" data-full="assets/l-emirmed-full.webp" width="420" height="534" alt="Благодарственное письмо медицинского центра Emirmed" loading="lazy" decoding="async"><span>Emirmed</span></li>
+      <li><img src="assets/l-tusas.webp" data-full="assets/l-tusas-full.webp" width="420" height="578" alt="Благодарственное письмо Turkish Aerospace (TUSAŞ)" loading="lazy" decoding="async"><span>Turkish Aerospace</span></li>
+      <li><img src="assets/l-tec.webp" data-full="assets/l-tec-full.webp" width="420" height="595" alt="Благодарственное письмо Степногорской ТЭЦ" loading="lazy" decoding="async"><span data-i="lt.tec">Степногорская ТЭЦ</span></li>
+      <li><img src="assets/l-hitech.webp" data-full="assets/l-hitech-full.webp" width="420" height="594" alt="Благодарственное письмо клиники Hi-Tech" loading="lazy" decoding="async"><span data-i="lt.hitech">Клиника Hi-Tech</span></li>
+      <li><img src="assets/l-ziylan.webp" data-full="assets/l-ziylan-full.webp" width="420" height="578" alt="Благодарственное письмо компании Ziylan" loading="lazy" decoding="async"><span>Ziylan</span></li>
+      <li><img src="assets/l-remkran.webp" data-full="assets/l-remkran-full.webp" width="420" height="594" alt="Благодарственное письмо компании РЭМ-Кран" loading="lazy" decoding="async"><span data-i="lt.remkran">РЭМ-Кран</span></li>
     </ul>
   </div>
 </section>
@@ -657,6 +657,15 @@
   <a class="sk-ig" href="https://www.instagram.com/aec_kazakhstan/" target="_blank" rel="noopener" aria-label="Instagram"><svg width="20" height="20"><use href="#ic-ig"/></svg></a>
 </nav>
 
-<script src="script.js?v=20261008-6" defer></script>
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Просмотр фото" data-i-aria="lb.title">
+  <div class="lb-stage" id="lbStage"><img class="lb-img" id="lbImg" alt=""></div>
+  <p class="lb-cap" id="lbCap"></p>
+  <span class="lb-count" id="lbCount"></span>
+  <button class="lb-btn lb-x" type="button" aria-label="Закрыть" data-i-aria="lb.close"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+  <button class="lb-btn lb-prev" type="button" aria-label="Назад" data-i-aria="btn.prev"><svg width="20" height="20" style="transform:scaleX(-1)"><use href="#ic-arr"/></svg></button>
+  <button class="lb-btn lb-next" type="button" aria-label="Вперёд" data-i-aria="btn.next"><svg width="20" height="20"><use href="#ic-arr"/></svg></button>
+</div>
+
+<script src="script.js?v=20261008-7" defer></script>
 </body>
 </html>

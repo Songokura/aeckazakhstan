@@ -67,6 +67,7 @@
     "cs.4h": "Laboratory, Karaganda", "cs.4t": "Modular Tescom MTW 300 kVA UPS and 80 Bereli batteries: if one module fails, the others carry the load",
     "cs.5h": "Qazaqstan TV channel, Astana", "cs.5t": "Qazaqstan HD mobile TV station: two Salicru 10 kVA UPS with battery cabinets",
     "cs.ig": "More projects on Instagram",
+    "lb.title": "Photo viewer", "lb.close": "Close", "lb.zoom": "Tap to zoom",
     "tr.k": "About", "tr.h": "AEC Kazakhstan: an engineering company from Almaty",
     "tr.t": "Official distributor of 12+ global brands, warehouse in Almaty, own service team. We work with companies and public customers across Kazakhstan.",
     "n.1": "projects", "n.2": "customers", "n.3": "brands distributed", "n.4": "regions of Kazakhstan", "n.5": "healthcare projects", "n.6": "kW - system capacity", "n.7": "service support",
@@ -341,6 +342,71 @@
     update();
     if (INTRO < 1) requestAnimationFrame(runIntro);
   }
+
+  /* ---------- Просмотр фото и писем ---------- */
+  (function () {
+    var lb = doc.getElementById("lb"); if (!lb) return;
+    var img = doc.getElementById("lbImg"), cap = doc.getElementById("lbCap"), cnt = doc.getElementById("lbCount"), stage = doc.getElementById("lbStage");
+    var SEL = ".case-ph img, .ind > img, .sk-ph img, .team img, .rail-letters img";
+    var list = [], idx = 0, lastFocus = null, x0 = null, y0 = null;
+    [].forEach.call(doc.querySelectorAll(SEL), function (el) { el.classList.add("zoomable"); });
+    function groupOf(el) { return el.closest(".rail-letters") ? "letters" : (el.closest("section") || doc.body).id + (el.closest(".team") ? "-team" : ""); }
+    function capOf(el) {
+      var c = el.closest(".case"); if (c) return [c.querySelector("h3"), c.querySelector("p")].map(function (n) { return n ? n.textContent : ""; }).join(". ");
+      var a = el.closest(".ind"); if (a && a.querySelector("h3")) return a.querySelector("h3").textContent;
+      var f = el.closest("figure"); if (f && f.querySelector("figcaption")) return f.querySelector("figcaption").textContent;
+      var l = el.closest("li"); if (l && l.querySelector("span")) return l.querySelector("span").textContent;
+      return el.alt || "";
+    }
+    function show(i) {
+      idx = (i + list.length) % list.length;
+      var el = list[idx];
+      lb.classList.remove("zoom"); stage.scrollTop = 0; stage.scrollLeft = 0;
+      lb.classList.toggle("is-doc", !!el.closest(".rail-letters"));
+      img.src = el.getAttribute("data-full") || el.currentSrc || el.src;
+      img.alt = el.alt || "";
+      cap.textContent = capOf(el);
+      cnt.textContent = list.length > 1 ? (idx + 1) + " / " + list.length : "";
+      lb.querySelector(".lb-prev").hidden = lb.querySelector(".lb-next").hidden = list.length < 2;
+    }
+    function open(el) {
+      var g = groupOf(el);
+      list = [].filter.call(doc.querySelectorAll(SEL), function (n) { return groupOf(n) === g; });
+      lastFocus = doc.activeElement;
+      lb.hidden = false; doc.body.classList.add("lb-open");
+      show(list.indexOf(el));
+      requestAnimationFrame(function () { lb.classList.add("open"); });
+      lb.querySelector(".lb-x").focus({ preventScroll: true, focusVisible: false });
+    }
+    function close() {
+      lb.classList.remove("open"); doc.body.classList.remove("lb-open");
+      setTimeout(function () { lb.hidden = true; img.removeAttribute("src"); }, 250);
+      if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+    }
+    doc.addEventListener("click", function (e) {
+      var el = e.target.closest && e.target.closest(".zoomable");
+      if (el && !lb.contains(el)) { e.preventDefault(); open(el); }
+    });
+    lb.querySelector(".lb-x").addEventListener("click", close);
+    lb.querySelector(".lb-prev").addEventListener("click", function () { show(idx - 1); });
+    lb.querySelector(".lb-next").addEventListener("click", function () { show(idx + 1); });
+    stage.addEventListener("click", function (e) {
+      if (e.target === img) { if (lb.classList.contains("is-doc")) lb.classList.toggle("zoom"); }
+      else if (!lb.classList.contains("zoom")) close();
+    });
+    doc.addEventListener("keydown", function (e) {
+      if (lb.hidden) return;
+      if (e.key === "Escape") close();
+      else if (e.key === "ArrowLeft") show(idx - 1);
+      else if (e.key === "ArrowRight") show(idx + 1);
+    });
+    stage.addEventListener("touchstart", function (e) { if (e.touches.length === 1) { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; } }, { passive: true });
+    stage.addEventListener("touchend", function (e) {
+      if (x0 === null || lb.classList.contains("zoom")) { x0 = null; return; }
+      var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0; x0 = null;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5 && list.length > 1) show(idx + (dx < 0 ? 1 : -1));
+    }, { passive: true });
+  })();
 
   /* ---------- Ленты со стрелками ---------- */
   var rails = [].slice.call(doc.querySelectorAll(".rail"));
