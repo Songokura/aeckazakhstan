@@ -290,7 +290,7 @@
     return 1;
   }
   function easeOut(x) { return 1 - Math.pow(1 - x, 3); }
-  var ticking = false;
+  var ticking = false, lastY = W.pageYOffset;
   function update() {
     ticking = false;
     var H = W.innerHeight;
@@ -314,10 +314,15 @@
       var txts = pw.querySelectorAll(".txt");
       for (var k = 0; k < txts.length; k++) txts[k].classList.toggle("on", isHero ? INTRO > 0.4 : enter > 0.72);
       if (isHero && mimic) {
-        var ph = stay < 0.33 ? "ph0" : stay < 0.66 ? "ph1" : "ph2";
+        var ph = r.height > H + 1 ? (stay < 0.33 ? "ph0" : stay < 0.66 ? "ph1" : "ph2") : ["ph0", "ph1", "ph2"][Math.floor(Date.now() / 2600) % 3];
         if (!mimic.classList.contains(ph)) { mimic.classList.remove("ph0", "ph1", "ph2"); mimic.classList.add(ph); }
       }
     }
+    var y = W.pageYOffset, dy = y - lastY;
+    if (y < HDR() * 2 || doc.body.classList.contains("menu-open")) doc.body.classList.remove("hdr-hide");
+    else if (dy > 6) doc.body.classList.add("hdr-hide");
+    else if (dy < -6) doc.body.classList.remove("hdr-hide");
+    if (Math.abs(dy) > 6) lastY = y;
     var sticky = doc.getElementById("sticky"), zay = doc.getElementById("zayavka");
     if (sticky) {
       var show = W.pageYOffset > H * 0.55;
@@ -327,6 +332,7 @@
   }
   function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
   W.addEventListener("scroll", onScroll, { passive: true });
+  setInterval(function () { if (pws[0] && pws[0].offsetHeight <= W.innerHeight + 1 && W.pageYOffset < W.innerHeight) onScroll(); }, 650);
   W.addEventListener("resize", function () { fitText(); onScroll(); updateRails(); });
   function runIntro(ts) {
     if (!introStart) introStart = ts;
